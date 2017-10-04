@@ -1,0 +1,918 @@
+
+> Education <- read.csv("C:/Users/Keisan/Documents/Career/wit/Esri/Shapefiles/CT_Schools_Map_2015.csv",
++                      header = TRUE,
++                      quote=","",
++                      stringsAsFactors= TRUE,
++                      strip.white = TRUE
++ )
++ 
++ )
++ Education <- read.csv("C:/Users/Keisan/Documents/Career/wit/Esri/Shapefiles/CT_Schools_Map_2015.csv",
+Error: unexpected string constant in:
+")
+Education <- read.csv(""
+>                      header = TRUE,
+Error: unexpected ',' in "                     header = TRUE,"
+>                      quote=","",
++                      stringsAsFactors= TRUE,
++                      strip.white = TRUE)
++ 
+
+> 
+
+> Education <- read.table("C:/Users/Keisan/Documents/Career/wit/esri/Shapefiles/CT_Schools_Map_2015.csv", header = TRUE, fill = TRUE)
+> 
+> View(Education)
+> Education <- read.csv2("C:/Users/Keisan/Documents/Career/wit/esri/Shapefiles/CT_Schools_Map_2015.csv", header = TRUE)
+Warning message:
+In scan(file = file, what = what, sep = sep, quote = quote, dec = dec,  :
+  EOF within quoted string
+> View(Education)
+> Education <- read.csv2("C:/Users/Keisan/Documents/Career/wit/esri/Shapefiles/CT_Schools_Map_2015.csv", header = TRUE, sep = ',')
+> View(Education)
+> numcol(Education)
+Error: could not find function "numcol"
+> colnum(Education)
+Error: could not find function "colnum"
+> colnumber(Education)
+Error: could not find function "colnumber"
+> ncol(Education)
+[1] 23
+> Education[,24] <- NA
+> ncol(Education)
+[1] 24
+> head(Education)
+                  District.Name                    School.Name Organization.Type Organization.Code                                                            Location.1
+1      Hartford School District     Parkville Community School    Public Schools            641511  47 New Park Avenue\nHartford, CT 06106-2160\n(41.755667, -72.706943)
+2 East Hartford School District      East Hartford High School    Public Schools            436211 869 Forbes St.\nEast Hartford, CT 06118-1921\n(41.752205, -72.605383)
+3 East Hartford School District Governor William Pitkin School    Public Schools            432011  330 Hills St.\nEast Hartford, CT 06118-2910\n(41.742084, -72.590162)
+4          Avon School District             Avon Middle School    Public Schools             45111        375 West Avon Rd.\nAvon, CT 06001-2208\n(41.79116, -72.862902)
+5      Hartford School District        McDonough Middle School    Public Schools            641211 111 Hillside Avenue\nHartford, CT 06106-3545\n(41.750387, -72.697814)
+6    Manchester School District               Verplanck School    Public Schools            771211    126 Olcott St.\nManchester, CT 06040-2632\n(41.773722, -72.553471)
+     Zipcode        Phone PreKindergarten Kindergarten Grade.1 Grade.2 Grade.3 Grade.4 Grade.5 Grade.6 Grade.7 Grade.8 Grade.9 Grade.10 Grade.11 Grade.12
+1 06106-2160 860-695-4721               1            1       1       1       1       1       1       0       0       0       0        0        0        0
+2 06118-1921 860-622-5200               0            0       0       0       0       0       0       0       0       0       1        1        1        1
+3 06118-2910 860-622-5480               0            1       1       1       1       1       1       0       0       0       0        0        0        0
+4 06001-2208 860-404-4770               0            0       0       0       0       0       0       0       1       1       0        0        0        0
+5 06106-3545 860-695-4260               0            0       0       0       0       0       0       1       1       1       0        0        0        0
+6 06040-2632 860-647-3383               0            1       1       1       1       1       1       0       0       0       0        0        0        0
+      Student.Open.Date Interdistrict.Magnet V24
+1 01Jul1984 0:00:00.000                    0  NA
+2 01Jul1984 0:00:00.000                    0  NA
+3 01Jul1984 0:00:00.000                    0  NA
+4 01Jul1984 0:00:00.000                    0  NA
+5 01Jul1984 0:00:00.000                    0  NA
+6 01Jul1984 0:00:00.000                    0  NA
+> Education[V24] <- Education[Coordinates]
+Error in `[.data.frame`(Education, Coordinates) : 
+  object 'Coordinates' not found
+> colnames(Education)[V24] <- "Coordinates"
+Error in colnames(Education)[V24] <- "Coordinates" : 
+  object 'V24' not found
+> colnames(Education)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"           "Zipcode"              "Phone"               
+ [8] "PreKindergarten"      "Kindergarten"         "Grade.1"              "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"             
+[15] "Grade.6"              "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"             "Grade.12"            
+[22] "Student.Open.Date"    "Interdistrict.Magnet" "V24"                 
+> colnames(Education)[V24] <- "Coordinates"
+Error in colnames(Education)[V24] <- "Coordinates" : 
+  object 'V24' not found
+> colnames(Education)[24] <- "Coordinates"
+> colnames(Education)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"           "Zipcode"              "Phone"               
+ [8] "PreKindergarten"      "Kindergarten"         "Grade.1"              "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"             
+[15] "Grade.6"              "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"             "Grade.12"            
+[22] "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"         
+> Education2 <- Education
+> require(reshape)
+Loading required package: reshape
+Warning message:
+In library(package, lib.loc = lib.loc, character.only = TRUE, logical.return = TRUE,  :
+  there is no package called ‘reshape’
+> require(reshape2)
+Loading required package: reshape2
+Warning message:
+package ‘reshape2’ was built under R version 3.3.3 
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\,", names = c('a', 'b'))
++ 
+
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\,", names = c('a', 'b')))
+Error in colsplit(Location.1, split = "\\,", names = c("a", "b")) : 
+  unused argument (split = "\\,")
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = ",", names = c('a', 'b')))
+Error in colsplit(Location.1, split = ",", names = c("a", "b")) : 
+  unused argument (split = ",")
+> head(Education2)
+                  District.Name                    School.Name Organization.Type Organization.Code                                                            Location.1
+1      Hartford School District     Parkville Community School    Public Schools            641511  47 New Park Avenue\nHartford, CT 06106-2160\n(41.755667, -72.706943)
+2 East Hartford School District      East Hartford High School    Public Schools            436211 869 Forbes St.\nEast Hartford, CT 06118-1921\n(41.752205, -72.605383)
+3 East Hartford School District Governor William Pitkin School    Public Schools            432011  330 Hills St.\nEast Hartford, CT 06118-2910\n(41.742084, -72.590162)
+4          Avon School District             Avon Middle School    Public Schools             45111        375 West Avon Rd.\nAvon, CT 06001-2208\n(41.79116, -72.862902)
+5      Hartford School District        McDonough Middle School    Public Schools            641211 111 Hillside Avenue\nHartford, CT 06106-3545\n(41.750387, -72.697814)
+6    Manchester School District               Verplanck School    Public Schools            771211    126 Olcott St.\nManchester, CT 06040-2632\n(41.773722, -72.553471)
+     Zipcode        Phone PreKindergarten Kindergarten Grade.1 Grade.2 Grade.3 Grade.4 Grade.5 Grade.6 Grade.7 Grade.8 Grade.9 Grade.10 Grade.11 Grade.12
+1 06106-2160 860-695-4721               1            1       1       1       1       1       1       0       0       0       0        0        0        0
+2 06118-1921 860-622-5200               0            0       0       0       0       0       0       0       0       0       1        1        1        1
+3 06118-2910 860-622-5480               0            1       1       1       1       1       1       0       0       0       0        0        0        0
+4 06001-2208 860-404-4770               0            0       0       0       0       0       0       0       1       1       0        0        0        0
+5 06106-3545 860-695-4260               0            0       0       0       0       0       0       1       1       1       0        0        0        0
+6 06040-2632 860-647-3383               0            1       1       1       1       1       1       0       0       0       0        0        0        0
+      Student.Open.Date Interdistrict.Magnet Coordinates
+1 01Jul1984 0:00:00.000                    0          NA
+2 01Jul1984 0:00:00.000                    0          NA
+3 01Jul1984 0:00:00.000                    0          NA
+4 01Jul1984 0:00:00.000                    0          NA
+5 01Jul1984 0:00:00.000                    0          NA
+6 01Jul1984 0:00:00.000                    0          NA
+> View(Education2)
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\(", names = c('a', 'b')))
+Error in colsplit(Location.1, split = "\\(", names = c("a", "b")) : 
+  unused argument (split = "\\(")
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\,", names = c('a', 'b')))
+Error in colsplit(Location.1, split = "\\,", names = c("a", "b")) : 
+  unused argument (split = "\\,")
+> library(stringr)
+Warning message:
+package ‘stringr’ was built under R version 3.3.3 
+> str_split_fixed(Education2$Location.1, "(", 41)
+Error in stri_split_regex(string, pattern, n = n, simplify = simplify,  : 
+  Incorrectly nested parentheses in regexp pattern. (U_REGEX_MISMATCHED_PAREN)
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\|,", names = c('a', 'b')))
+Error in colsplit(Location.1, split = "\\|,", names = c("a", "b")) : 
+  unused argument (split = "\\|,")
+> Education2 = transform(Education2, Location.1 = colsplit(Location.1, split = "\\|", names = c('a', 'b')))
+Error in colsplit(Location.1, split = "\\|", names = c("a", "b")) : 
+  unused argument (split = "\\|")
+> install.packages(tidyr)
+Error in install.packages : object 'tidyr' not found
+> library(tidyr)
+
+Attaching package: ‘tidyr’
+
+The following object is masked from ‘package:reshape2’:
+
+    smiths
+
+Warning message:
+package ‘tidyr’ was built under R version 3.3.3 
+> install.packages(tidyr)
+Error in install.packages : object 'tidyr' not found
+> separate(data = Education2, col = Location.1, into = c("Address", "Latlong"), sep = "\\(")
+                                         District.Name
+1                             Hartford School District
+2                        East Hartford School District
+3                        East Hartford School District
+4                                 Avon School District
+5                             Hartford School District
+6                           Manchester School District
+7                        West Hartford School District
+8                        West Hartford School District
+9                             Hartford School District
+10                       East Hartford School District
+11                            Hartford School District
+12                       West Hartford School District
+13                          Manchester School District
+14                          Farmington School District
+15                            Hartford School District
+16                                Avon School District
+17                       West Hartford School District
+18                            Hartford School District
+19                       West Hartford School District
+20                          Manchester School District
+21                            Hartford School District
+22                            Hartford School District
+23                          Farmington School District
+24                            Hartford School District
+25                       East Hartford School District
+26                            Hartford School District
+27                            Hartford School District
+28                       East Hartford School District
+29                            Hartford School District
+30                       East Hartford School District
+31                            Hartford School District
+32                            Hartford School District
+33                            Hartford School District
+34                            Hartford School District
+35                            Hartford School District
+36                          Manchester School District
+37                       East Hartford School District
+38                       West Hartford School District
+39                            Hartford School District
+40                            Hartford School District
+                                                            School.Name
+1                                            Parkville Community School
+2                                             East Hartford High School
+3                                        Governor William Pitkin School
+4                                                    Avon Middle School
+5                                               McDonough Middle School
+6                                                      Verplanck School
+7                                                   Whiting Lane School
+8                                                          Duffy School
+9                                   Sports and Medical Sciences Academy
+10                                               Connecticut IB Academy
+11                                                          Burr School
+12                                                        Morley School
+13                                                       Buckley School
+14                                               Farmington High School
+15                                          Betances STEM Magnet School
+16                                                Thompson Brook School
+17                                                  Webster Hill School
+18                                       Naylor/CCSU Leadership Academy
+19                                    Charter Oak International Academy
+20                                                        Martin School
+21                                                    High School, Inc.
+22                                                      Kennelly School
+23                                                         Union School
+24                                                       Sanchez School
+25  Sunset Ridge School Elementary Academy for Arts and World Languages
+26                             Asian Studies Academy at Bellizzi School
+27                             HPHS Nursing and Health Sciences Academy
+28                                        East Hartford School District
+29                                  Webster Micro Society Magnet School
+30                                                   Silver Lane School
+31                           Journalism and Media Academy Magnet School
+32                            Pathways Academy of Technology and Design
+33                             Capital Community College Magnet Academy
+34                               Hartford PreKindergarten Magnet School
+35                                      HPHS Law and Government Academy
+36                                                 Highland Park School
+37                                       Dr. Thomas S. O'Connell School
+38                                                     Hall High School
+39                                                 Bulkeley High School
+40                                        Global Communications Academy
+                                     Organization.Type Organization.Code
+1                                       Public Schools            641511
+2                                       Public Schools            436211
+3                                       Public Schools            432011
+4                                       Public Schools             45111
+5                                       Public Schools            641211
+6                                       Public Schools            771211
+7                                       Public Schools           1551311
+8                                       Public Schools           1550611
+9                                       Public Schools            646511
+10                                      Public Schools            436311
+11                                      Public Schools            642311
+12                                      Public Schools           1550911
+13                                      Public Schools            770311
+14                                      Public Schools            526111
+15                                      Public Schools            643811
+16                                      Public Schools             40511
+17                                      Public Schools           1551211
+18                                      Public Schools            641411
+19                                      Public Schools           1550511
+20                                      Public Schools            771611
+21                                      Public Schools            647611
+22                                      Public Schools            641011
+23                                      Public Schools            520111
+24                                      Public Schools            643011
+25                                      Public Schools            432411
+26                                      Public Schools            640711
+27                                      Public Schools            647511
+28                             Public School Districts            430011
+29                                      Public Schools            642011
+30                                      Public Schools            431211
+31                                      Public Schools            647711
+32                                      Public Schools            646611
+33                                      Public Schools            643911
+34                                      Public Schools            641311
+35                                      Public Schools            647411
+36                                      Public Schools            770411
+37                                      Public Schools            431011
+38                                      Public Schools           1556211
+39                                      Public Schools            647111
+40                                      Public Schools            643611
+                                                 Address                Latlong    Zipcode        Phone PreKindergarten
+1          47 New Park Avenue\nHartford, CT 06106-2160\n 41.755667, -72.706943) 06106-2160 860-695-4721               1
+2         869 Forbes St.\nEast Hartford, CT 06118-1921\n 41.752205, -72.605383) 06118-1921 860-622-5200               0
+3          330 Hills St.\nEast Hartford, CT 06118-2910\n 41.742084, -72.590162) 06118-2910 860-622-5480               0
+4               375 West Avon Rd.\nAvon, CT 06001-2208\n  41.79116, -72.862902) 06001-2208 860-404-4770               0
+5         111 Hillside Avenue\nHartford, CT 06106-3545\n 41.750387, -72.697814) 06106-3545 860-695-4260               0
+6            126 Olcott St.\nManchester, CT 06040-2632\n 41.773722, -72.553471) 06040-2632 860-647-3383               0
+7         47 Whiting Ln.\nWest Hartford, CT 06119-1642\n 41.762726, -72.724195) 06119-1642 860-233-8541               1
+8     95 Westminster St.\nWest Hartford, CT 06107-3353\n 41.746712, -72.752606) 06107-3353 860-521-0110               0
+9              280 Huyshope Avenue\nHartford, CT 06106\n 41.752365, -72.660526)      06106 860-695-6900               0
+10             857 Forbes St.\nEast Hartford, CT 06118\n  41.75256, -72.604839)      06118 860-622-5590               0
+11    400 Wethersfield Avenue\nHartford, CT 06114-1414\n  41.744899, -72.67309) 06114-1414 860-695-3080               1
+12        77 Bretton Rd.\nWest Hartford, CT 06119-1209\n 41.768896, -72.731542) 06119-1209 860-233-8535               0
+13           250 Vernon St.\nManchester, CT 06042-3473\n 41.792577, -72.492843) 06042-3473 860-647-3302               1
+14           10 Monteith Dr\nFarmington, CT 06032-1052\n 41.748583, -72.868445) 06032-1052 860-673-2514               0
+15         585 Wethersfield Avenue\nHartford, CT 06114\n 41.739804, -72.671781)      06114 860-695-2840               0
+16               150 Thompson Rd.\nAvon, CT 06001-2208\n 41.771337, -72.854024) 06001-2208 860-404-4870               0
+17     125 Webster Hill Blvd.\nWest Hartford, CT 06117\n 41.743595, -72.740681)      06117 860-521-0320               1
+18        639 Franklin Avenue\nHartford, CT 06114-3030\n  41.730999, -72.67424) 06114-3030 860-695-4620               1
+19           425 Oakwood Ave.\nWest Hartford, CT 06110\n 41.743366, -72.720653)      06110 860-233-8506               1
+20        140 Dartmouth Rd.\nManchester, CT 06040-6616\n  41.75386, -72.511342) 06040-6616 860-647-3367               0
+21          875 Asylum Avenue\nHartford, CT 06105-1960\n 41.770264, -72.693896) 06105-1960 860-695-7101               0
+22           180 White Street\nHartford, CT 06114-2242\n  41.73482, -72.695022) 06114-2242 860-695-3860               1
+23           173 School St.\nUnionville, CT 06085-1096\n 41.758586, -72.889596) 06085-1096 860-673-2575               0
+24         176 Babcock Street\nHartford, CT 06106-1357\n 41.758918, -72.689238) 06106-1357 860-695-4940               1
+25             450 Forbes St.\nEast Hartford, CT 06118\n  41.76422, -72.600015)      06118 860-622-5800               0
+26           215 South Street\nHartford, CT 06114-1918\n   41.734533, -72.6809) 06114-1918 860-695-2400               1
+27                55 Forest Street\nHartford, CT 06105\n 41.765472, -72.700221)      06105 860-695-1325               0
+28           1110 Main Street\nEast Hartford, CT 06108\n 41.772886, -72.641536)      06108 860-622-5101               1
+29                   5 Cone Street\nHartford, CT 06105\n 41.768894, -72.712253)      06105 860-695-5380               1
+30        15 Mercer Ave.\nEast Hartford, CT 06118-1517\n   41.7608, -72.634157) 06118-1517 860-622-5500               1
+31                150 Tower Street\nHartford, CT 06120\n 41.797635, -72.670349)      06120 860-695-1818               0
+32                2 Pent Road\nEast Hartford, CT 06118\n 41.740864, -72.634535)      06118 860-695-9450               0
+33                 950 Main Street\nHartford, CT 06103\n  41.76836, -72.673045)      06103 860-965-8000               0
+34             121 Cornwall Street\nHartford, CT 06112\n 41.791308, -72.701776)      06112 860-695-5820               1
+35                55 Forest Street\nHartford, CT 06105\n 41.765472, -72.700221)      06105 860-695-1300               0
+36           397 Porter St.\nManchester, CT 06040-5575\n  41.77239, -72.495014) 06040-5575 860-647-3430               0
+37           301 May Rd.\nEast Hartford, CT 06118-3434\n  41.73434, -72.596633) 06118-3434 860-622-5460               0
+38    975 North Main St.\nWest Hartford, CT 06117-2057\n   41.7954, -72.747327) 06117-2057 860-232-4561               0
+39    300 Wethersfield Avenue\nHartford, CT 06114-1409\n 41.747601, -72.673459) 06114-1409 860-695-1011               0
+40          85 Edwards Street\nHartford, CT 06112-1826\n 41.774537, -72.681497) 06112-1826 860-695-6020               0
+    Kindergarten Grade.1 Grade.2 Grade.3 Grade.4 Grade.5 Grade.6 Grade.7 Grade.8 Grade.9 Grade.10 Grade.11 Grade.12
+1              1       1       1       1       1       1       0       0       0       0        0        0        0
+2              0       0       0       0       0       0       0       0       0       1        1        1        1
+3              1       1       1       1       1       1       0       0       0       0        0        0        0
+4              0       0       0       0       0       0       0       1       1       0        0        0        0
+5              0       0       0       0       0       0       1       1       1       0        0        0        0
+6              1       1       1       1       1       1       0       0       0       0        0        0        0
+7              1       1       1       1       1       1       0       0       0       0        0        0        0
+8              1       1       1       1       1       1       0       0       0       0        0        0        0
+9              0       0       0       0       0       0       1       1       1       1        1        1        1
+10             0       0       0       0       0       0       0       0       0       1        1        1        1
+11             1       1       1       1       1       1       1       1       1       0        0        0        0
+12             1       1       1       1       1       1       0       0       0       0        0        0        0
+13             1       1       1       1       1       1       0       0       0       0        0        0        0
+14             0       0       0       0       0       0       0       0       0       1        1        1        1
+15             0       0       0       0       1       1       1       1       1       0        0        0        0
+16             0       0       0       0       0       1       1       0       0       0        0        0        0
+17             1       1       1       1       1       1       0       0       0       0        0        0        0
+18             1       1       1       1       1       1       1       1       1       0        0        0        0
+19             1       1       1       1       1       1       0       0       0       0        0        0        0
+20             1       1       1       1       1       1       0       0       0       0        0        0        0
+21             0       0       0       0       0       0       0       0       0       1        1        1        1
+22             1       1       1       1       1       1       1       1       1       0        0        0        0
+23             1       1       1       1       1       0       0       0       0       0        0        0        0
+24             1       1       1       1       1       1       0       0       0       0        0        0        0
+25             0       0       0       0       0       0       1       1       1       0        0        0        0
+26             1       1       1       1       1       1       1       1       1       0        0        0        0
+27             0       0       0       0       0       0       0       0       0       1        1        1        1
+28             1       1       1       1       1       1       1       1       1       1        1        1        1
+29             1       1       1       1       1       1       1       1       1       0        0        0        0
+30             1       1       1       1       1       1       0       0       0       0        0        0        0
+31             0       0       0       0       0       0       0       0       0       1        1        1        1
+32             0       0       0       0       0       0       0       0       0       1        1        1        1
+33             0       0       0       0       0       0       0       0       0       0        0        1        1
+34             0       0       0       0       0       0       0       0       0       0        0        0        0
+35             0       0       0       0       0       0       0       0       0       1        1        1        1
+36             1       1       1       1       1       1       0       0       0       0        0        0        0
+37             1       1       1       1       1       1       1       0       0       0        0        0        0
+38             0       0       0       0       0       0       0       0       0       1        1        1        1
+39             0       0       0       0       0       0       0       0       0       1        1        1        1
+40             1       1       1       1       1       1       1       1       1       1        1        1        1
+        Student.Open.Date Interdistrict.Magnet Coordinates
+1   01Jul1984 0:00:00.000                    0          NA
+2   01Jul1984 0:00:00.000                    0          NA
+3   01Jul1984 0:00:00.000                    0          NA
+4   01Jul1984 0:00:00.000                    0          NA
+5   01Jul1984 0:00:00.000                    0          NA
+6   01Jul1984 0:00:00.000                    0          NA
+7   01Jul1984 0:00:00.000                    0          NA
+8   01Jul1984 0:00:00.000                    0          NA
+9   01Jul2002 0:00:00.000                    1          NA
+10  01Jul2003 0:00:00.000                    1          NA
+11  01Jul1984 0:00:00.000                    0          NA
+12  01Jul1984 0:00:00.000                    0          NA
+13  01Jul1984 0:00:00.000                    0          NA
+14  01Jul1984 0:00:00.000                    0          NA
+15  01Jul2012 0:00:00.000                    1          NA
+16  01Jul2002 0:00:00.000                    0          NA
+17  01Jul1984 0:00:00.000                    0          NA
+18  01Jul1984 0:00:00.000                    0          NA
+19  01Jul1984 0:00:00.000                    0          NA
+20  01Jul1984 0:00:00.000                    0          NA
+21  01Jul2009 0:00:00.000                    0          NA
+22  01Jul1984 0:00:00.000                    0          NA
+23  01Jul1984 0:00:00.000                    0          NA
+24  01Jul1992 0:00:00.000                    0          NA
+25  01Jul1999 0:00:00.000                    0          NA
+26  01Jul1984 0:00:00.000                    0          NA
+27  01Jul2009 0:00:00.000                    0          NA
+28  01Jul1996 0:00:00.000                    0          NA
+29  01Jul1984 0:00:00.000                    1          NA
+30  01Jul1984 0:00:00.000                    0          NA
+31  01Jul2009 0:00:00.000                    1          NA
+32  01Jul2003 0:00:00.000                    1          NA
+33  26Aug2014 0:00:00.000                    1          NA
+34  01Jul2013 0:00:00.000                    1          NA
+35  01Jul2009 0:00:00.000                    0          NA
+36  30Aug2012 0:00:00.000                    0          NA
+37  01Jul1984 0:00:00.000                    0          NA
+38  01Jul1984 0:00:00.000                    0          NA
+39  01Jul2009 0:00:00.000                    0          NA
+40  25Aug2008 0:00:00.000                    0          NA
+ [ reached getOption("max.print") -- omitted 84 rows ]
+> 
+> View(Education2)
+> within(Education2, Location.1<-data.frame(do.call('rbind', strsplit(as.character(Location.1), '(', fixed=TRUE))))
+                                         District.Name
+1                             Hartford School District
+2                        East Hartford School District
+3                        East Hartford School District
+4                                 Avon School District
+5                             Hartford School District
+6                           Manchester School District
+7                        West Hartford School District
+8                        West Hartford School District
+9                             Hartford School District
+10                       East Hartford School District
+11                            Hartford School District
+12                       West Hartford School District
+13                          Manchester School District
+14                          Farmington School District
+15                            Hartford School District
+16                                Avon School District
+17                       West Hartford School District
+18                            Hartford School District
+19                       West Hartford School District
+20                          Manchester School District
+21                            Hartford School District
+22                            Hartford School District
+23                          Farmington School District
+24                            Hartford School District
+25                       East Hartford School District
+26                            Hartford School District
+27                            Hartford School District
+28                       East Hartford School District
+29                            Hartford School District
+30                       East Hartford School District
+31                            Hartford School District
+32                            Hartford School District
+33                            Hartford School District
+34                            Hartford School District
+35                            Hartford School District
+36                          Manchester School District
+37                       East Hartford School District
+38                       West Hartford School District
+39                            Hartford School District
+40                            Hartford School District
+                                                            School.Name
+1                                            Parkville Community School
+2                                             East Hartford High School
+3                                        Governor William Pitkin School
+4                                                    Avon Middle School
+5                                               McDonough Middle School
+6                                                      Verplanck School
+7                                                   Whiting Lane School
+8                                                          Duffy School
+9                                   Sports and Medical Sciences Academy
+10                                               Connecticut IB Academy
+11                                                          Burr School
+12                                                        Morley School
+13                                                       Buckley School
+14                                               Farmington High School
+15                                          Betances STEM Magnet School
+16                                                Thompson Brook School
+17                                                  Webster Hill School
+18                                       Naylor/CCSU Leadership Academy
+19                                    Charter Oak International Academy
+20                                                        Martin School
+21                                                    High School, Inc.
+22                                                      Kennelly School
+23                                                         Union School
+24                                                       Sanchez School
+25  Sunset Ridge School Elementary Academy for Arts and World Languages
+26                             Asian Studies Academy at Bellizzi School
+27                             HPHS Nursing and Health Sciences Academy
+28                                        East Hartford School District
+29                                  Webster Micro Society Magnet School
+30                                                   Silver Lane School
+31                           Journalism and Media Academy Magnet School
+32                            Pathways Academy of Technology and Design
+33                             Capital Community College Magnet Academy
+34                               Hartford PreKindergarten Magnet School
+35                                      HPHS Law and Government Academy
+36                                                 Highland Park School
+37                                       Dr. Thomas S. O'Connell School
+38                                                     Hall High School
+39                                                 Bulkeley High School
+40                                        Global Communications Academy
+                                     Organization.Type Organization.Code
+1                                       Public Schools            641511
+2                                       Public Schools            436211
+3                                       Public Schools            432011
+4                                       Public Schools             45111
+5                                       Public Schools            641211
+6                                       Public Schools            771211
+7                                       Public Schools           1551311
+8                                       Public Schools           1550611
+9                                       Public Schools            646511
+10                                      Public Schools            436311
+11                                      Public Schools            642311
+12                                      Public Schools           1550911
+13                                      Public Schools            770311
+14                                      Public Schools            526111
+15                                      Public Schools            643811
+16                                      Public Schools             40511
+17                                      Public Schools           1551211
+18                                      Public Schools            641411
+19                                      Public Schools           1550511
+20                                      Public Schools            771611
+21                                      Public Schools            647611
+22                                      Public Schools            641011
+23                                      Public Schools            520111
+24                                      Public Schools            643011
+25                                      Public Schools            432411
+26                                      Public Schools            640711
+27                                      Public Schools            647511
+28                             Public School Districts            430011
+29                                      Public Schools            642011
+30                                      Public Schools            431211
+31                                      Public Schools            647711
+32                                      Public Schools            646611
+33                                      Public Schools            643911
+34                                      Public Schools            641311
+35                                      Public Schools            647411
+36                                      Public Schools            770411
+37                                      Public Schools            431011
+38                                      Public Schools           1556211
+39                                      Public Schools            647111
+40                                      Public Schools            643611
+                                           Location.1.X1          Location.1.X2    Zipcode        Phone PreKindergarten
+1          47 New Park Avenue\nHartford, CT 06106-2160\n 41.755667, -72.706943) 06106-2160 860-695-4721               1
+2         869 Forbes St.\nEast Hartford, CT 06118-1921\n 41.752205, -72.605383) 06118-1921 860-622-5200               0
+3          330 Hills St.\nEast Hartford, CT 06118-2910\n 41.742084, -72.590162) 06118-2910 860-622-5480               0
+4               375 West Avon Rd.\nAvon, CT 06001-2208\n  41.79116, -72.862902) 06001-2208 860-404-4770               0
+5         111 Hillside Avenue\nHartford, CT 06106-3545\n 41.750387, -72.697814) 06106-3545 860-695-4260               0
+6            126 Olcott St.\nManchester, CT 06040-2632\n 41.773722, -72.553471) 06040-2632 860-647-3383               0
+7         47 Whiting Ln.\nWest Hartford, CT 06119-1642\n 41.762726, -72.724195) 06119-1642 860-233-8541               1
+8     95 Westminster St.\nWest Hartford, CT 06107-3353\n 41.746712, -72.752606) 06107-3353 860-521-0110               0
+9              280 Huyshope Avenue\nHartford, CT 06106\n 41.752365, -72.660526)      06106 860-695-6900               0
+10             857 Forbes St.\nEast Hartford, CT 06118\n  41.75256, -72.604839)      06118 860-622-5590               0
+11    400 Wethersfield Avenue\nHartford, CT 06114-1414\n  41.744899, -72.67309) 06114-1414 860-695-3080               1
+12        77 Bretton Rd.\nWest Hartford, CT 06119-1209\n 41.768896, -72.731542) 06119-1209 860-233-8535               0
+13           250 Vernon St.\nManchester, CT 06042-3473\n 41.792577, -72.492843) 06042-3473 860-647-3302               1
+14           10 Monteith Dr\nFarmington, CT 06032-1052\n 41.748583, -72.868445) 06032-1052 860-673-2514               0
+15         585 Wethersfield Avenue\nHartford, CT 06114\n 41.739804, -72.671781)      06114 860-695-2840               0
+16               150 Thompson Rd.\nAvon, CT 06001-2208\n 41.771337, -72.854024) 06001-2208 860-404-4870               0
+17     125 Webster Hill Blvd.\nWest Hartford, CT 06117\n 41.743595, -72.740681)      06117 860-521-0320               1
+18        639 Franklin Avenue\nHartford, CT 06114-3030\n  41.730999, -72.67424) 06114-3030 860-695-4620               1
+19           425 Oakwood Ave.\nWest Hartford, CT 06110\n 41.743366, -72.720653)      06110 860-233-8506               1
+20        140 Dartmouth Rd.\nManchester, CT 06040-6616\n  41.75386, -72.511342) 06040-6616 860-647-3367               0
+21          875 Asylum Avenue\nHartford, CT 06105-1960\n 41.770264, -72.693896) 06105-1960 860-695-7101               0
+22           180 White Street\nHartford, CT 06114-2242\n  41.73482, -72.695022) 06114-2242 860-695-3860               1
+23           173 School St.\nUnionville, CT 06085-1096\n 41.758586, -72.889596) 06085-1096 860-673-2575               0
+24         176 Babcock Street\nHartford, CT 06106-1357\n 41.758918, -72.689238) 06106-1357 860-695-4940               1
+25             450 Forbes St.\nEast Hartford, CT 06118\n  41.76422, -72.600015)      06118 860-622-5800               0
+26           215 South Street\nHartford, CT 06114-1918\n   41.734533, -72.6809) 06114-1918 860-695-2400               1
+27                55 Forest Street\nHartford, CT 06105\n 41.765472, -72.700221)      06105 860-695-1325               0
+28           1110 Main Street\nEast Hartford, CT 06108\n 41.772886, -72.641536)      06108 860-622-5101               1
+29                   5 Cone Street\nHartford, CT 06105\n 41.768894, -72.712253)      06105 860-695-5380               1
+30        15 Mercer Ave.\nEast Hartford, CT 06118-1517\n   41.7608, -72.634157) 06118-1517 860-622-5500               1
+31                150 Tower Street\nHartford, CT 06120\n 41.797635, -72.670349)      06120 860-695-1818               0
+32                2 Pent Road\nEast Hartford, CT 06118\n 41.740864, -72.634535)      06118 860-695-9450               0
+33                 950 Main Street\nHartford, CT 06103\n  41.76836, -72.673045)      06103 860-965-8000               0
+34             121 Cornwall Street\nHartford, CT 06112\n 41.791308, -72.701776)      06112 860-695-5820               1
+35                55 Forest Street\nHartford, CT 06105\n 41.765472, -72.700221)      06105 860-695-1300               0
+36           397 Porter St.\nManchester, CT 06040-5575\n  41.77239, -72.495014) 06040-5575 860-647-3430               0
+37           301 May Rd.\nEast Hartford, CT 06118-3434\n  41.73434, -72.596633) 06118-3434 860-622-5460               0
+38    975 North Main St.\nWest Hartford, CT 06117-2057\n   41.7954, -72.747327) 06117-2057 860-232-4561               0
+39    300 Wethersfield Avenue\nHartford, CT 06114-1409\n 41.747601, -72.673459) 06114-1409 860-695-1011               0
+40          85 Edwards Street\nHartford, CT 06112-1826\n 41.774537, -72.681497) 06112-1826 860-695-6020               0
+    Kindergarten Grade.1 Grade.2 Grade.3 Grade.4 Grade.5 Grade.6 Grade.7 Grade.8 Grade.9 Grade.10 Grade.11 Grade.12
+1              1       1       1       1       1       1       0       0       0       0        0        0        0
+2              0       0       0       0       0       0       0       0       0       1        1        1        1
+3              1       1       1       1       1       1       0       0       0       0        0        0        0
+4              0       0       0       0       0       0       0       1       1       0        0        0        0
+5              0       0       0       0       0       0       1       1       1       0        0        0        0
+6              1       1       1       1       1       1       0       0       0       0        0        0        0
+7              1       1       1       1       1       1       0       0       0       0        0        0        0
+8              1       1       1       1       1       1       0       0       0       0        0        0        0
+9              0       0       0       0       0       0       1       1       1       1        1        1        1
+10             0       0       0       0       0       0       0       0       0       1        1        1        1
+11             1       1       1       1       1       1       1       1       1       0        0        0        0
+12             1       1       1       1       1       1       0       0       0       0        0        0        0
+13             1       1       1       1       1       1       0       0       0       0        0        0        0
+14             0       0       0       0       0       0       0       0       0       1        1        1        1
+15             0       0       0       0       1       1       1       1       1       0        0        0        0
+16             0       0       0       0       0       1       1       0       0       0        0        0        0
+17             1       1       1       1       1       1       0       0       0       0        0        0        0
+18             1       1       1       1       1       1       1       1       1       0        0        0        0
+19             1       1       1       1       1       1       0       0       0       0        0        0        0
+20             1       1       1       1       1       1       0       0       0       0        0        0        0
+21             0       0       0       0       0       0       0       0       0       1        1        1        1
+22             1       1       1       1       1       1       1       1       1       0        0        0        0
+23             1       1       1       1       1       0       0       0       0       0        0        0        0
+24             1       1       1       1       1       1       0       0       0       0        0        0        0
+25             0       0       0       0       0       0       1       1       1       0        0        0        0
+26             1       1       1       1       1       1       1       1       1       0        0        0        0
+27             0       0       0       0       0       0       0       0       0       1        1        1        1
+28             1       1       1       1       1       1       1       1       1       1        1        1        1
+29             1       1       1       1       1       1       1       1       1       0        0        0        0
+30             1       1       1       1       1       1       0       0       0       0        0        0        0
+31             0       0       0       0       0       0       0       0       0       1        1        1        1
+32             0       0       0       0       0       0       0       0       0       1        1        1        1
+33             0       0       0       0       0       0       0       0       0       0        0        1        1
+34             0       0       0       0       0       0       0       0       0       0        0        0        0
+35             0       0       0       0       0       0       0       0       0       1        1        1        1
+36             1       1       1       1       1       1       0       0       0       0        0        0        0
+37             1       1       1       1       1       1       1       0       0       0        0        0        0
+38             0       0       0       0       0       0       0       0       0       1        1        1        1
+39             0       0       0       0       0       0       0       0       0       1        1        1        1
+40             1       1       1       1       1       1       1       1       1       1        1        1        1
+        Student.Open.Date Interdistrict.Magnet Coordinates
+1   01Jul1984 0:00:00.000                    0          NA
+2   01Jul1984 0:00:00.000                    0          NA
+3   01Jul1984 0:00:00.000                    0          NA
+4   01Jul1984 0:00:00.000                    0          NA
+5   01Jul1984 0:00:00.000                    0          NA
+6   01Jul1984 0:00:00.000                    0          NA
+7   01Jul1984 0:00:00.000                    0          NA
+8   01Jul1984 0:00:00.000                    0          NA
+9   01Jul2002 0:00:00.000                    1          NA
+10  01Jul2003 0:00:00.000                    1          NA
+11  01Jul1984 0:00:00.000                    0          NA
+12  01Jul1984 0:00:00.000                    0          NA
+13  01Jul1984 0:00:00.000                    0          NA
+14  01Jul1984 0:00:00.000                    0          NA
+15  01Jul2012 0:00:00.000                    1          NA
+16  01Jul2002 0:00:00.000                    0          NA
+17  01Jul1984 0:00:00.000                    0          NA
+18  01Jul1984 0:00:00.000                    0          NA
+19  01Jul1984 0:00:00.000                    0          NA
+20  01Jul1984 0:00:00.000                    0          NA
+21  01Jul2009 0:00:00.000                    0          NA
+22  01Jul1984 0:00:00.000                    0          NA
+23  01Jul1984 0:00:00.000                    0          NA
+24  01Jul1992 0:00:00.000                    0          NA
+25  01Jul1999 0:00:00.000                    0          NA
+26  01Jul1984 0:00:00.000                    0          NA
+27  01Jul2009 0:00:00.000                    0          NA
+28  01Jul1996 0:00:00.000                    0          NA
+29  01Jul1984 0:00:00.000                    1          NA
+30  01Jul1984 0:00:00.000                    0          NA
+31  01Jul2009 0:00:00.000                    1          NA
+32  01Jul2003 0:00:00.000                    1          NA
+33  26Aug2014 0:00:00.000                    1          NA
+34  01Jul2013 0:00:00.000                    1          NA
+35  01Jul2009 0:00:00.000                    0          NA
+36  30Aug2012 0:00:00.000                    0          NA
+37  01Jul1984 0:00:00.000                    0          NA
+38  01Jul1984 0:00:00.000                    0          NA
+39  01Jul2009 0:00:00.000                    0          NA
+40  25Aug2008 0:00:00.000                    0          NA
+ [ reached getOption("max.print") -- omitted 84 rows ]
+> View(Education2)
+> foo <- data.frame(do.call('rbind', strsplit(as.character(Education2$Location.1),'|',fixed=TRUE)))
+> View(Education2)
+> View(foo)
+> foo <- data.frame(do.call('rbind', strsplit(as.character(Education2$Location.1),'(',fixed=TRUE)))
+> View(foo)
+> View(Education2)
+> head(foo)
+                                              X1                     X2
+1  47 New Park Avenue\nHartford, CT 06106-2160\n 41.755667, -72.706943)
+2 869 Forbes St.\nEast Hartford, CT 06118-1921\n 41.752205, -72.605383)
+3  330 Hills St.\nEast Hartford, CT 06118-2910\n 41.742084, -72.590162)
+4       375 West Avon Rd.\nAvon, CT 06001-2208\n  41.79116, -72.862902)
+5 111 Hillside Avenue\nHartford, CT 06106-3545\n 41.750387, -72.697814)
+6    126 Olcott St.\nManchester, CT 06040-2632\n 41.773722, -72.553471)
+> install.packages(stringr)
+Error in install.packages : object 'stringr' not found
+> library(stringr)
+> install.packages(stringr)
+Error in install.packages : object 'stringr' not found
+> str_sub(foo$X2, 1, str_length(foo$X2)-0)
+  [1] "41.755667, -72.706943)" "41.752205, -72.605383)" "41.742084, -72.590162)" "41.79116, -72.862902)" 
+  [5] "41.750387, -72.697814)" "41.773722, -72.553471)" "41.762726, -72.724195)" "41.746712, -72.752606)"
+  [9] "41.752365, -72.660526)" "41.75256, -72.604839)"  "41.744899, -72.67309)"  "41.768896, -72.731542)"
+ [13] "41.792577, -72.492843)" "41.748583, -72.868445)" "41.739804, -72.671781)" "41.771337, -72.854024)"
+ [17] "41.743595, -72.740681)" "41.730999, -72.67424)"  "41.743366, -72.720653)" "41.75386, -72.511342)" 
+ [21] "41.770264, -72.693896)" "41.73482, -72.695022)"  "41.758586, -72.889596)" "41.758918, -72.689238)"
+ [25] "41.76422, -72.600015)"  "41.734533, -72.6809)"   "41.765472, -72.700221)" "41.772886, -72.641536)"
+ [29] "41.768894, -72.712253)" "41.7608, -72.634157)"   "41.797635, -72.670349)" "41.740864, -72.634535)"
+ [33] "41.76836, -72.673045)"  "41.791308, -72.701776)" "41.765472, -72.700221)" "41.77239, -72.495014)" 
+ [37] "41.73434, -72.596633)"  "41.7954, -72.747327)"   "41.747601, -72.673459)" "41.774537, -72.681497)"
+ [41] "41.761181, -72.690452)" "41.759238, -72.672397)" "41.783911, -72.516872)" "41.756412, -72.541535)"
+ [45] "41.747153, -72.706594)" "41.793033, -72.610556)" "41.795089, -72.761635)" "41.77655, -72.856995)" 
+ [49] "41.791267, -72.600756)" "41.791455, -72.708169)" "41.774592, -72.688018)" "41.795135, -72.681593)"
+ [53] "41.783729, -72.513302)" "41.772855, -72.700469)" "41.795041, -72.676727)" "41.755411, -72.596044)"
+ [57] "41.780335, -72.604106)" "41.772344, -72.67604)"  "41.779062, -72.753545)" "41.800352, -72.746562)"
+ [61] "41.739258, -72.605054)" "41.736609, -72.879254)" "41.781511, -72.864107)" "41.791646, -72.890398)"
+ [65] "41.76667, -72.693801)"  "41.772385, -72.677792)" "41.791455, -72.708169)" "41.795753, -72.700254)"
+ [69] "41.735275, -72.748052)" "41.788434, -72.511322)" "41.765472, -72.700221)" "41.751262, -72.686491)"
+ [73] "41.782572, -72.688205)" "41.746596, -72.680861)" "41.758969, -72.742404)" "41.751416, -72.724832)"
+ [77] "41.776131, -72.595744)" "41.775394, -72.442618)" "41.778567, -72.676209)" "41.785598, -72.696006)"
+ [81] "41.797101, -72.525517)" "41.733029, -72.707841)" "41.767033, -72.533259)" "41.750913, -72.754815)"
+ [85] "41.746325, -72.69866)"  "41.755051, -72.664936)" "41.796562, -72.525398)" "41.769174, -72.717979)"
+ [89] "41.77079, -72.695583)"  "41.762843, -72.76097)"  "41.784926, -72.631363)" "41.793505, -72.74291)" 
+ [93] "41.764578, -72.554719)" "41.797834, -72.709685)" "41.765966, -72.52042)"  "41.741112, -72.700528)"
+ [97] "41.78315, -72.535283)"  "41.804787, -72.704285)" "41.795753, -72.700254)" "41.746325, -72.69866)" 
+[101] "41.75687, -72.687045)"  "41.75513, -72.6637)"    "41.769801, -72.692389)" "41.781054, -72.550379)"
+[105] "41.792496, -72.660232)" "41.758771, -72.682223)" "41.76359, -72.691281)"  "41.784608, -72.697162)"
+[109] "41.763725, -72.689632)" "41.749562, -72.687108)" "41.800895, -72.81903)"  "41.742942, -72.709302)"
+[113] "41.76808, -72.68776)"   "41.745141, -72.639556)" "41.759392, -72.656659)" "41.781068, -72.560562)"
+[117] "41.806542, -72.595282)" "41.751395, -72.683832)" "41.795953, -72.687633)" "41.764875, -72.693924)"
+[121] "41.740888, -72.907697)" "41.758569, -72.668311)" "41.756984, -72.678702)" "41.755448, -72.664054)"
+> 
+> str_sub(foo$X2, 1, str_length(foo$X2)-0)
+  [1] "41.755667, -72.706943)" "41.752205, -72.605383)" "41.742084, -72.590162)" "41.79116, -72.862902)" 
+  [5] "41.750387, -72.697814)" "41.773722, -72.553471)" "41.762726, -72.724195)" "41.746712, -72.752606)"
+  [9] "41.752365, -72.660526)" "41.75256, -72.604839)"  "41.744899, -72.67309)"  "41.768896, -72.731542)"
+ [13] "41.792577, -72.492843)" "41.748583, -72.868445)" "41.739804, -72.671781)" "41.771337, -72.854024)"
+ [17] "41.743595, -72.740681)" "41.730999, -72.67424)"  "41.743366, -72.720653)" "41.75386, -72.511342)" 
+ [21] "41.770264, -72.693896)" "41.73482, -72.695022)"  "41.758586, -72.889596)" "41.758918, -72.689238)"
+ [25] "41.76422, -72.600015)"  "41.734533, -72.6809)"   "41.765472, -72.700221)" "41.772886, -72.641536)"
+ [29] "41.768894, -72.712253)" "41.7608, -72.634157)"   "41.797635, -72.670349)" "41.740864, -72.634535)"
+ [33] "41.76836, -72.673045)"  "41.791308, -72.701776)" "41.765472, -72.700221)" "41.77239, -72.495014)" 
+ [37] "41.73434, -72.596633)"  "41.7954, -72.747327)"   "41.747601, -72.673459)" "41.774537, -72.681497)"
+ [41] "41.761181, -72.690452)" "41.759238, -72.672397)" "41.783911, -72.516872)" "41.756412, -72.541535)"
+ [45] "41.747153, -72.706594)" "41.793033, -72.610556)" "41.795089, -72.761635)" "41.77655, -72.856995)" 
+ [49] "41.791267, -72.600756)" "41.791455, -72.708169)" "41.774592, -72.688018)" "41.795135, -72.681593)"
+ [53] "41.783729, -72.513302)" "41.772855, -72.700469)" "41.795041, -72.676727)" "41.755411, -72.596044)"
+ [57] "41.780335, -72.604106)" "41.772344, -72.67604)"  "41.779062, -72.753545)" "41.800352, -72.746562)"
+ [61] "41.739258, -72.605054)" "41.736609, -72.879254)" "41.781511, -72.864107)" "41.791646, -72.890398)"
+ [65] "41.76667, -72.693801)"  "41.772385, -72.677792)" "41.791455, -72.708169)" "41.795753, -72.700254)"
+ [69] "41.735275, -72.748052)" "41.788434, -72.511322)" "41.765472, -72.700221)" "41.751262, -72.686491)"
+ [73] "41.782572, -72.688205)" "41.746596, -72.680861)" "41.758969, -72.742404)" "41.751416, -72.724832)"
+ [77] "41.776131, -72.595744)" "41.775394, -72.442618)" "41.778567, -72.676209)" "41.785598, -72.696006)"
+ [81] "41.797101, -72.525517)" "41.733029, -72.707841)" "41.767033, -72.533259)" "41.750913, -72.754815)"
+ [85] "41.746325, -72.69866)"  "41.755051, -72.664936)" "41.796562, -72.525398)" "41.769174, -72.717979)"
+ [89] "41.77079, -72.695583)"  "41.762843, -72.76097)"  "41.784926, -72.631363)" "41.793505, -72.74291)" 
+ [93] "41.764578, -72.554719)" "41.797834, -72.709685)" "41.765966, -72.52042)"  "41.741112, -72.700528)"
+ [97] "41.78315, -72.535283)"  "41.804787, -72.704285)" "41.795753, -72.700254)" "41.746325, -72.69866)" 
+[101] "41.75687, -72.687045)"  "41.75513, -72.6637)"    "41.769801, -72.692389)" "41.781054, -72.550379)"
+[105] "41.792496, -72.660232)" "41.758771, -72.682223)" "41.76359, -72.691281)"  "41.784608, -72.697162)"
+[109] "41.763725, -72.689632)" "41.749562, -72.687108)" "41.800895, -72.81903)"  "41.742942, -72.709302)"
+[113] "41.76808, -72.68776)"   "41.745141, -72.639556)" "41.759392, -72.656659)" "41.781068, -72.560562)"
+[117] "41.806542, -72.595282)" "41.751395, -72.683832)" "41.795953, -72.687633)" "41.764875, -72.693924)"
+[121] "41.740888, -72.907697)" "41.758569, -72.668311)" "41.756984, -72.678702)" "41.755448, -72.664054)"
+> str_sub(foo$X2, 1, str_length(foo$X2)-1)
+  [1] "41.755667, -72.706943" "41.752205, -72.605383" "41.742084, -72.590162" "41.79116, -72.862902" 
+  [5] "41.750387, -72.697814" "41.773722, -72.553471" "41.762726, -72.724195" "41.746712, -72.752606"
+  [9] "41.752365, -72.660526" "41.75256, -72.604839"  "41.744899, -72.67309"  "41.768896, -72.731542"
+ [13] "41.792577, -72.492843" "41.748583, -72.868445" "41.739804, -72.671781" "41.771337, -72.854024"
+ [17] "41.743595, -72.740681" "41.730999, -72.67424"  "41.743366, -72.720653" "41.75386, -72.511342" 
+ [21] "41.770264, -72.693896" "41.73482, -72.695022"  "41.758586, -72.889596" "41.758918, -72.689238"
+ [25] "41.76422, -72.600015"  "41.734533, -72.6809"   "41.765472, -72.700221" "41.772886, -72.641536"
+ [29] "41.768894, -72.712253" "41.7608, -72.634157"   "41.797635, -72.670349" "41.740864, -72.634535"
+ [33] "41.76836, -72.673045"  "41.791308, -72.701776" "41.765472, -72.700221" "41.77239, -72.495014" 
+ [37] "41.73434, -72.596633"  "41.7954, -72.747327"   "41.747601, -72.673459" "41.774537, -72.681497"
+ [41] "41.761181, -72.690452" "41.759238, -72.672397" "41.783911, -72.516872" "41.756412, -72.541535"
+ [45] "41.747153, -72.706594" "41.793033, -72.610556" "41.795089, -72.761635" "41.77655, -72.856995" 
+ [49] "41.791267, -72.600756" "41.791455, -72.708169" "41.774592, -72.688018" "41.795135, -72.681593"
+ [53] "41.783729, -72.513302" "41.772855, -72.700469" "41.795041, -72.676727" "41.755411, -72.596044"
+ [57] "41.780335, -72.604106" "41.772344, -72.67604"  "41.779062, -72.753545" "41.800352, -72.746562"
+ [61] "41.739258, -72.605054" "41.736609, -72.879254" "41.781511, -72.864107" "41.791646, -72.890398"
+ [65] "41.76667, -72.693801"  "41.772385, -72.677792" "41.791455, -72.708169" "41.795753, -72.700254"
+ [69] "41.735275, -72.748052" "41.788434, -72.511322" "41.765472, -72.700221" "41.751262, -72.686491"
+ [73] "41.782572, -72.688205" "41.746596, -72.680861" "41.758969, -72.742404" "41.751416, -72.724832"
+ [77] "41.776131, -72.595744" "41.775394, -72.442618" "41.778567, -72.676209" "41.785598, -72.696006"
+ [81] "41.797101, -72.525517" "41.733029, -72.707841" "41.767033, -72.533259" "41.750913, -72.754815"
+ [85] "41.746325, -72.69866"  "41.755051, -72.664936" "41.796562, -72.525398" "41.769174, -72.717979"
+ [89] "41.77079, -72.695583"  "41.762843, -72.76097"  "41.784926, -72.631363" "41.793505, -72.74291" 
+ [93] "41.764578, -72.554719" "41.797834, -72.709685" "41.765966, -72.52042"  "41.741112, -72.700528"
+ [97] "41.78315, -72.535283"  "41.804787, -72.704285" "41.795753, -72.700254" "41.746325, -72.69866" 
+[101] "41.75687, -72.687045"  "41.75513, -72.6637"    "41.769801, -72.692389" "41.781054, -72.550379"
+[105] "41.792496, -72.660232" "41.758771, -72.682223" "41.76359, -72.691281"  "41.784608, -72.697162"
+[109] "41.763725, -72.689632" "41.749562, -72.687108" "41.800895, -72.81903"  "41.742942, -72.709302"
+[113] "41.76808, -72.68776"   "41.745141, -72.639556" "41.759392, -72.656659" "41.781068, -72.560562"
+[117] "41.806542, -72.595282" "41.751395, -72.683832" "41.795953, -72.687633" "41.764875, -72.693924"
+[121] "41.740888, -72.907697" "41.758569, -72.668311" "41.756984, -72.678702" "41.755448, -72.664054"
+> foo2 <- data.frame(do.call('rbind', strsplit(as.character(foo$X2),'(',fixed=TRUE)))
+> View(foo2)
+> View(foo)
+> View(foo)
+> foo[X2] <- str_sub(foo$X2, 1, str_length(foo$X2)-1)
+Error in `[<-.data.frame`(`*tmp*`, X2, value = c("41.755667, -72.706943",  : 
+  object 'X2' not found
+> foo[2] <- str_sub(foo$X2, 1, str_length(foo$X2)-1)
+> View(foo)
+> foo2 <- data.frame(do.call('rbind', strsplit(as.character(foo$X2),',',fixed=TRUE)))
+> View(foo2)
+> Education2$Location.1 <- foo$X1
+> View(Education2)
+> colnumber(Education2)
+Error: could not find function "colnumber"
+> ncol(Education2)
+[1] 24
+> head(Education2)
+                  District.Name                    School.Name Organization.Type Organization.Code
+1      Hartford School District     Parkville Community School    Public Schools            641511
+2 East Hartford School District      East Hartford High School    Public Schools            436211
+3 East Hartford School District Governor William Pitkin School    Public Schools            432011
+4          Avon School District             Avon Middle School    Public Schools             45111
+5      Hartford School District        McDonough Middle School    Public Schools            641211
+6    Manchester School District               Verplanck School    Public Schools            771211
+                                      Location.1    Zipcode        Phone PreKindergarten Kindergarten Grade.1 Grade.2
+1  47 New Park Avenue\nHartford, CT 06106-2160\n 06106-2160 860-695-4721               1            1       1       1
+2 869 Forbes St.\nEast Hartford, CT 06118-1921\n 06118-1921 860-622-5200               0            0       0       0
+3  330 Hills St.\nEast Hartford, CT 06118-2910\n 06118-2910 860-622-5480               0            1       1       1
+4       375 West Avon Rd.\nAvon, CT 06001-2208\n 06001-2208 860-404-4770               0            0       0       0
+5 111 Hillside Avenue\nHartford, CT 06106-3545\n 06106-3545 860-695-4260               0            0       0       0
+6    126 Olcott St.\nManchester, CT 06040-2632\n 06040-2632 860-647-3383               0            1       1       1
+  Grade.3 Grade.4 Grade.5 Grade.6 Grade.7 Grade.8 Grade.9 Grade.10 Grade.11 Grade.12     Student.Open.Date
+1       1       1       1       0       0       0       0        0        0        0 01Jul1984 0:00:00.000
+2       0       0       0       0       0       0       1        1        1        1 01Jul1984 0:00:00.000
+3       1       1       1       0       0       0       0        0        0        0 01Jul1984 0:00:00.000
+4       0       0       0       0       1       1       0        0        0        0 01Jul1984 0:00:00.000
+5       0       0       0       1       1       1       0        0        0        0 01Jul1984 0:00:00.000
+6       1       1       1       0       0       0       0        0        0        0 01Jul1984 0:00:00.000
+  Interdistrict.Magnet Coordinates
+1                    0          NA
+2                    0          NA
+3                    0          NA
+4                    0          NA
+5                    0          NA
+6                    0          NA
+> Education[25] <- "Longitude"
+> Education[24] <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"         
+> Education2[25] <- "Latitude"
+> Education2[24] <- "Latitude"
+> Education2[25] <- "Longitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+> Education2$Coordinates <- "Longitude"
+> Education2$Longitude <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"           
+> Education2$V2 <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"            "V2"                  
+> Education2$V25 <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"            "V2"                  
+> Education2$V2 <- NULL
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"           
+> Education2$V25 <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"           
+> Education2[25] <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "V25"                 
+[26] "Longitude"           
+> Education2$V25<- NULL
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "Longitude"           
+> Education2$Coordinates <- "Latitude"
+> colnames(Education2)
+ [1] "District.Name"        "School.Name"          "Organization.Type"    "Organization.Code"    "Location.1"          
+ [6] "Zipcode"              "Phone"                "PreKindergarten"      "Kindergarten"         "Grade.1"             
+[11] "Grade.2"              "Grade.3"              "Grade.4"              "Grade.5"              "Grade.6"             
+[16] "Grade.7"              "Grade.8"              "Grade.9"              "Grade.10"             "Grade.11"            
+[21] "Grade.12"             "Student.Open.Date"    "Interdistrict.Magnet" "Coordinates"          "Longitude"           
+> Education2$Coordinates <- "Latitude"
+> View(Education2)
+> Education2$Coordinates <- foo2$X1
+> View(Education2)
+> Education2$Longitude <- foo2$X2
+> View(Education2)
+> fileEncoding = "")
+Error: unexpected ')' in "fileEncoding = "")"
+> col.names = TRUE, qmethod = c("escape", "double"))
+Error: unexpected ',' in "col.names = TRUE,"
+> write.csv(Education2, file = "C:/Users/Keisan/Documents/Career/wit/Esri/Shapefile/Education2.csv")
+Error in file(file, ifelse(append, "a", "w")) : 
+  cannot open the connection
+In addition: Warning message:
+In file(file, ifelse(append, "a", "w")) :
+  cannot open file 'C:/Users/Keisan/Documents/Career/wit/Esri/Shapefile/Education2.csv': No such file or directory
+> write.csv(Education2, file = "C:/Users/Keisan/Documents/Career/wit/esri/Shapefiles/Education2.csv")
+> 
