@@ -1,0 +1,51 @@
+#how to import a file : 
+library(readr)
+DSI <- read_csv("C:/Users/Keisan/Documents/Career/General Assembly/DSI_kickstarterscrape_dataset.csv")
+View(DSI)
+colnames(DSI)
+
+install.packages("dplyr")
+library(dplyr)
+DSI_suc <- select(filter(DSI, status == "successful"),c("project id","name","url","category","subcategory","location","status","goal","pledged","funded percentage","backers","funded date","levels","reward levels","updates","comments","duration"))
+View(DSI_suc)
+#mean for column
+mean(DSI_suc$duration, na.rm = TRUE) 
+mean(DSI_suc$goal, na.rm= TRUE)
+# mode for column
+library(modeest)
+mlv(DSI_suc$duration, method = "mfv")
+mlv(DSI_suc$goal, method = "mfv")
+mlv(DSI_suc2$NewCat, method ="mfv") #not working
+
+Mode <- function(DSI_suc2$NewCat) 
+  ux <- unique(DSI_suc2$NewCat)
+  ux[which.max(tabulate(match(DSI_suc2$NewCat, ux)))]
+
+DSI_suc2 <- DSI_suc
+DSI_suc2$category <- as.numeric(as.character(DSI_suc2$category))
+View(DSI_suc2)
+mlv(DSI_suc$category, method = "mfv")
+
+
+# histograms
+#Histogram of the AirPassengers dataset with title “Histogram for Air Passengers”
+hist(log(DSI_suc$pledged)) 
+
+hist(DSI_suc, 
+     main="Histogram for Pledge Distribution", 
+     xlab="pledged", 
+     border="blue", 
+     col="green",
+     xlim=c(100,700),
+     las=1, 
+     breaks=5)
+
+hist(log(DSI_suc2$NewCat))
+
+#deidenitify data in category column
+
+DSI_suc2$NewCat <- DSI_suc2 %>% group_indices(category) 
+DSI_suc2 <- DSI_suc2 %>% select(-category)
+
+#returns unique variables in row
+unique(DSI_suc$category, incomparables = FALSE)
